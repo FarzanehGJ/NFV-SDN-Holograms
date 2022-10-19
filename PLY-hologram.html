@@ -97,10 +97,11 @@
 				// PLY file
 
 				const loader = new PLYLoader();
+
                 for(let i=1051; i<1351; i++){
                         let num_i = i.toString();
                         let filename = "";
-                        filename = filename.concat("./Ply/longdress_vox10_",num_i,".ply");
+                        filename = filename.concat("./decoded/",num_i,".ply");
                         streamHologram (filename,loader,scene);
                 }
 			}
@@ -120,12 +121,11 @@
 					mesh.position.z =  0;
 					mesh.scale.multiplyScalar( 0.0006 );
 
-					scene.remove(mesh);
 					scene.add( mesh );
 
-					/*setTimeout(function(){
+					setTimeout(function(){
 					    scene.remove(mesh);
-					},1000);*/
+					},1000);
 
 				} );
 			}
