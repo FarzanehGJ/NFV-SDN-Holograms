@@ -7,6 +7,7 @@
 4) Open the "PLY-hologram.html" code whit "Chrome" browser
 
 **For Encoding and Decoding**<br />
-There is a bash file named "bash.sh". Inside this file, all 300 ply original files are encoded and saved in folder named "out" and the decoded and saved to folder 
+First you need to clone [draco repository](https://github.com/google/draco) and build it inside the NFV-SDN-Hologram project folder.
+Then, there is a bash file named "bash.sh". Inside this file, all 300 ply original files are encoded and saved in folder named "out" and the decoded and saved to folder 
 named "decoded". 
 The "PLY-holograms.html" file will read the decoded files from "decoded" folder, render and show in the Chrome browser.
