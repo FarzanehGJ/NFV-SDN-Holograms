@@ -18,8 +18,8 @@
 * Bash.sh<br />
 * main.css<br /><br />
 
-** In one terminal run the WebServer.js to serve the webpage and in another terminal run the Server.js to decode the requested files**
-** Then in a Chrome browser type "localhost:3000/PLY-hologram.html"**
+**In one terminal run the WebServer.js to serve the webpage and in another terminal run the Server.js to decode the requested files**
+**Then in a Chrome browser type "localhost:3000/PLY-hologram.html"**
 
 **For Encoding and Decoding**<br />
 First you need to clone [draco repository](https://github.com/google/draco) and build it inside the NFV-SDN-Hologram project folder.
