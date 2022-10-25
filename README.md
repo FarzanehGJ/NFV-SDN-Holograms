@@ -7,16 +7,17 @@
 4) Clone [draco repository](https://github.com/google/draco) and build it inside the NFV-SDN-Hologram project folder.
 5) Open the "PLY-hologram.html" code whit "Chrome" browser
 
--NFV-SDN-Holograms
-    |_ three (cloned from three.js github)
-    |_ draco (cloned from draco github)
-    |_ PLY-hologram.html
-    |_ PlyScript.js
-    |_ Server.js
-    |_ WebServer.js
-    |_ Run.sh
-    |_ Bash.sh
-    |_ main.css
+**NFV-SDN-Holograms:**
+* three (cloned from three.js github)<br />
+* draco (cloned from draco github)<br />
+* PLY-hologram.html<br />
+* PlyScript.js<br />
+* Server.js<br />
+* WebServer.js<br />
+* Run.sh<br />
+* Bash.sh<br />
+* main.css<br /><br />
+
 
 **When you run the Run.sh file, it will run two servers. One is serving the webpage on port 3000 and the other is doing the decoding process on port 8080.**
 
