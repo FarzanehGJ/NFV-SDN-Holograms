@@ -8,7 +8,6 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { AnimationMixer } from './three/src/animation/AnimationMixer.js ';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 let container, stats;
-
 let camera, cameraTarget, scene, renderer;
 
 init();
@@ -78,23 +77,81 @@ function init() {
     // PLY file
 
     const loader = new PLYLoader();
-    let xhr = new XMLHttpRequest();
+    Myloop(loader,scene);
+
 
 // 1351
+
+}
+
+async function Myloop(loader,scene){
+    let decode_url = "";
     for(let i=1051; i<1351; i++){
-    // send request to server and ask for decoding
-        let num_i = i.toString();
-//        let request = "https://localhost:8080/"+num_i+".drc";
-//        console.log(request);
-//        let response = xhr.open("GET", request);
-//        console.log(response)
-        let filename = "";
-        filename = filename.concat("./decoded/",num_i,".ply");
-        streamHologram (filename,loader,scene);
-    }
+        // send request to server and ask for decoding
+            let num_i = i.toString();
+            let filename = "";
+            decode_url = "";
+            filename = filename.concat("/decoded/",num_i,".ply");
+            decode_url = decode_url.concat("http://localhost:8080/",num_i,".drc");
+
+            //const x = await resolveWait(decode_url);
+            //console.log(x);
+            while(true){
+                if(await resolveWait(decode_url)){
+                    streamHologram(filename,loader,scene);
+                    break;
+                }
+                else{
+                    continue;
+                }
+            }
+        }
+}
+
+function resolveWait(url) {
+var oXHR = new XMLHttpRequest();
+
+          oXHR.open("GET", url, true);
+
+          oXHR.onreadystatechange = function (oEvent) {
+              if (oXHR.readyState === 4) {
+                  if (oXHR.status === 200) {
+                    console.log(oXHR.responseText)
+                  } else {
+                     console.log("Error", oXHR.statusText);
+                  }
+              }
+          };
+      oXHR.send(null);
+  return new Promise((resolve) => {
+  setTimeout(function(){
+      resolve(1);
+  },400);
+
+  });
+}
+
+function fileExists(url)
+{
+    var oXHR = new XMLHttpRequest();
+
+    oXHR.open("GET", url, true);
+
+    oXHR.onreadystatechange = function (oEvent) {
+        if (oXHR.readyState === 4) {
+            if (oXHR.status === 200) {
+              console.log(oXHR.responseText)
+            } else {
+               console.log("Error", oXHR.statusText);
+            }
+        }
+    };
+
+    oXHR.send(null);
 }
 
 function streamHologram (file, loader, scene){
+
     loader.load( file, function ( geometry ) {
 
         geometry.computeVertexNormals();
@@ -108,12 +165,11 @@ function streamHologram (file, loader, scene){
         mesh.scale.multiplyScalar( 0.0006 );
 
         scene.add( mesh );
-
-        /*setTimeout(function(){
+        setTimeout(function(){
             scene.remove(mesh);
-        },1000);*/
+        },700);
 
-    } );
+    });
 }
 
 function onWindowResize() {

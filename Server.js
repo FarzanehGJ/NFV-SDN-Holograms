@@ -1,5 +1,6 @@
-const http = require("http");
+const http = require('http');
 var url = require('url');
+const fs = require('fs');
 
 const host = 'localhost';
 const port = 8080;
@@ -12,10 +13,28 @@ function response(fileNum,res){
     console.log(command);
     subExec.exec(command);
     console.log("Done!");
-    res.end("OK");
+    res.writeHead(200);
+    res.end('200');
 }
+//
+//const requestListener = function (req, res) {
+//    fs.readFile(__dirname + "/index.html")
+//        .then(contents => {
+//            res.setHeader("Content-Type", "text/html");
+//            res.writeHead(200);
+//            res.end(contents);
+//        })
+//        .catch(err => {
+//            res.writeHead(500);
+//            res.end(err);
+//            return;
+//        });
+//};
 
 const server = http.createServer(function (req,res){
+
+//    res.setHeader("Content-Type", "application/javascript");
+//    fs.createReadStream('./PLY-hologram.html').pipe(res);
 
     //response();
     let address = url.parse(req.url,true);
@@ -26,7 +45,7 @@ const server = http.createServer(function (req,res){
         response(fileNum[0],res);
     }
     else {
-        res.end('No input!!','utf-8');
+        res.writeHead(404);
     }
 });
 
