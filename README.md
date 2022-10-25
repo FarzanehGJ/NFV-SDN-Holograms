@@ -5,7 +5,7 @@
 2) Clone three.js repository from [three.js github](https://github.com/mrdoob/three.js/) and put it in the same directory of "PLY-hologram.html" code.
 3) Download dataset of [PLY files](http://plenodb.jpeg.org/pc/8ilabs/). Then copy just "Ply" folder and Paset it in the same directory of "PLY-hologram.html" code.
 4) Clone [draco repository](https://github.com/google/draco) and build it inside the NFV-SDN-Hologram project folder.
-5) Open the "PLY-hologram.html" code whit "Chrome" browser
+5) Run the Run.sh file
 
 **NFV-SDN-Holograms:**
 * three (cloned from three.js github)<br />
