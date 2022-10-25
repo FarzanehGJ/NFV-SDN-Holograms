@@ -77,14 +77,11 @@ function init() {
     // PLY file
 
     const loader = new PLYLoader();
-    Myloop(loader,scene);
-
-
-// 1351
+    loadLoop(loader,scene);
 
 }
 
-async function Myloop(loader,scene){
+async function loadLoop(loader,scene){
     let decode_url = "";
     for(let i=1051; i<1351; i++){
         // send request to server and ask for decoding
@@ -94,8 +91,6 @@ async function Myloop(loader,scene){
             filename = filename.concat("/decoded/",num_i,".ply");
             decode_url = decode_url.concat("http://localhost:8080/",num_i,".drc");
 
-            //const x = await resolveWait(decode_url);
-            //console.log(x);
             while(true){
                 if(await resolveWait(decode_url)){
                     streamHologram(filename,loader,scene);
@@ -129,25 +124,6 @@ var oXHR = new XMLHttpRequest();
   },400);
 
   });
-}
-
-function fileExists(url)
-{
-    var oXHR = new XMLHttpRequest();
-
-    oXHR.open("GET", url, true);
-
-    oXHR.onreadystatechange = function (oEvent) {
-        if (oXHR.readyState === 4) {
-            if (oXHR.status === 200) {
-              console.log(oXHR.responseText)
-            } else {
-               console.log("Error", oXHR.statusText);
-            }
-        }
-    };
-
-    oXHR.send(null);
 }
 
 function streamHologram (file, loader, scene){
