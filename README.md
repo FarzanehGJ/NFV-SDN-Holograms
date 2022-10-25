@@ -9,7 +9,7 @@
 6) Run Server.js in another terminal
 7) In the chrome browser type "localhost:3000/PLY-hologram.html" to run the program.
 
-**NFV-SDN-Holograms:**
+**Inside NFV-SDN-Holograms folder you should have:**
 * three (cloned from three.js github)<br />
 * draco (cloned from draco github)<br />
 * PLY-hologram.html<br />
