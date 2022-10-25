@@ -16,27 +16,9 @@ function response(fileNum,res){
     res.writeHead(200);
     res.end('200');
 }
-//
-//const requestListener = function (req, res) {
-//    fs.readFile(__dirname + "/index.html")
-//        .then(contents => {
-//            res.setHeader("Content-Type", "text/html");
-//            res.writeHead(200);
-//            res.end(contents);
-//        })
-//        .catch(err => {
-//            res.writeHead(500);
-//            res.end(err);
-//            return;
-//        });
-//};
 
 const server = http.createServer(function (req,res){
 
-//    res.setHeader("Content-Type", "application/javascript");
-//    fs.createReadStream('./PLY-hologram.html').pipe(res);
-
-    //response();
     let address = url.parse(req.url,true);
     var Url = address.href;
     var fileNum = Url.split("/");

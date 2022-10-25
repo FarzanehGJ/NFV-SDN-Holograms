@@ -1,2 +1,3 @@
-node ./draco/build_dir/Server.js &
-open -a "Google Chrome" PLY-hologram.html &
+node Server.js &
+node WebServer.js &
+open -a "Google Chrome" http://localhost:3000/PLY-hologram.html
