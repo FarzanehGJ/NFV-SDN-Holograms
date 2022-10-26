@@ -9,7 +9,7 @@ const port = 8080;
 function response(fileNum,res){
     const subExec = require("child_process");
     let command = " ";
-    command = "./draco/build_dir/draco_decoder  -i ./out/"+fileNum+".drc -o ./decoded/"+fileNum+".ply";
+    command = "./draco/build_dir/draco_decoder  -i ./encoderOut/"+fileNum+".drc -o ./decoded/"+fileNum+".ply";
     console.log(command);
     subExec.exec(command);
     console.log("Done!");

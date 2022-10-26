@@ -3,10 +3,10 @@
 cd draco/build_dir
 counter=1051
 #1350
-while [ $counter -le 1055 ]
+while [ $counter -le 1350 ]
 do
-./draco_encoder -point_cloud -i ../../Ply/longdress_vox10_$counter.ply -o ../../out/$counter.drc
-#./draco_decoder  -i ../../out/$counter.drc -o ../../decoded/$counter.ply
+./draco_encoder -point_cloud -i ../../Ply/longdress_vox10_$counter.ply -o ../../encoderOut/$counter.drc
+#./draco_decoder  -i ../../encoderOut/$counter.drc -o ../../decoded/$counter.ply
 ((counter++))
 done
 
