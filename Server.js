@@ -2,12 +2,11 @@
 
 const http = require('http');
 var url = require('url');
-const fs = require('fs');
 const host = 'localhost';
 const port = 8080;
 
+// This function will run the draco_decoder to decode each drc file to ply
 function response(fileNum,res){
-    // decode only one file
     const subExec = require("child_process");
     let command = " ";
     command = "./draco/build_dir/draco_decoder  -i ./out/"+fileNum+".drc -o ./decoded/"+fileNum+".ply";
