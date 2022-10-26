@@ -1,4 +1,5 @@
-//Web Server
+//Web Server to serve the WebXR webpage
+
  var connect = require('connect');
  var serveStatic = require('serve-static');
 
