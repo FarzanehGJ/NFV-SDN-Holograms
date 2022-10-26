@@ -1,14 +1,11 @@
-
 import * as THREE from 'three';
-
 import Stats from 'three/addons/libs/stats.module.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { PLYLoader } from 'three/addons/loaders/PLYLoader.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { AnimationMixer } from './three/src/animation/AnimationMixer.js ';
-import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+
 let container, stats;
-let camera, cameraTarget, scene, renderer;
+let camera, scene, renderer;
 
 init();
 animate();
@@ -18,32 +15,26 @@ function init() {
     container = document.createElement( 'div' );
     document.body.appendChild( container );
 
-    //camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 15 );
-    //camera.position.set( 3,0.15,3 );
-
-    //cameraTarget = new THREE.Vector3( 0, - 0.1, 0 );
+    // Creating Scene
 
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xa0a0a0 );
     scene.fog = new THREE.Fog( 0xa0a0a0, 10, 50 );
 
 
-    // Ground
+    // Creating Ground
 
     const mesh = new THREE.Mesh( new THREE.PlaneGeometry( 200, 200 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
     mesh.rotation.x = - Math.PI / 2;
     scene.add( mesh );
 
-    // Lights
+    // Creating Lights
 
     const hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
     hemiLight.position.set( 0, 20, 0 );
     scene.add( hemiLight );
 
-    //addShadowedLight( 1, 1, 1, 0xffffff, 1.35 );
-    //addShadowedLight( 0.5, 1, - 1, 0xffaa00, 1 );
-
-    // renderer
+    // Creating renderer
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -51,12 +42,10 @@ function init() {
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.shadowMap.enabled = true;
     container.appendChild( renderer.domElement );
+    //container.appendChild( renderer.domElement );
 
-    //renderer.shadowMap.enabled = true;
+    // Creating Camera
 
-    container.appendChild( renderer.domElement );
-
-    // camera
     camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 100 );
     camera.position.set( 1,1, 3 );6
 
@@ -65,7 +54,7 @@ function init() {
     controls.target.set( 0, 0, 0 );
     controls.update();
 
-    // stats
+    // Creating Stats
 
     stats = new Stats();
     container.appendChild( stats.dom );
@@ -74,23 +63,34 @@ function init() {
 
     window.addEventListener( 'resize', onWindowResize );
 
-    // PLY file
+    // Creating PLYLoader file
 
     const loader = new PLYLoader();
+
+    // Loading files
+
     loadLoop(loader,scene);
 
 }
 
+//This function will create the file directory for using in loader
+// and the url address for sending request for decoding
 async function loadLoop(loader,scene){
     let decode_url = "";
+
     for(let i=1051; i<1351; i++){
-        // send request to server and ask for decoding
             let num_i = i.toString();
             let filename = "";
             decode_url = "";
+            //file directory address
             filename = filename.concat("/decoded/",num_i,".ply");
+            //url address for decoding request sending to server
             decode_url = decode_url.concat("http://localhost:8080/",num_i,".drc");
 
+            //check if the decoded file exist in folder or not:
+            // if yes, pass the file directory, loader and scene to the loader function
+            // if no, loop until the file be created in the folder
+            // await will use to make the process synchronous
             while(true){
                 if(await resolveWait(decode_url)){
                     streamHologram(filename,loader,scene);
@@ -103,6 +103,8 @@ async function loadLoop(loader,scene){
         }
 }
 
+// This function will send request to the server for decoding targeted file
+// the promise will use to make the process synchronous
 function resolveWait(url) {
 var oXHR = new XMLHttpRequest();
 
@@ -126,6 +128,7 @@ var oXHR = new XMLHttpRequest();
   });
 }
 
+// This function will load the ply files in the Chrome browser
 function streamHologram (file, loader, scene){
 
     loader.load( file, function ( geometry ) {
@@ -147,6 +150,7 @@ function streamHologram (file, loader, scene){
 
     });
 }
+
 
 function onWindowResize() {
 
