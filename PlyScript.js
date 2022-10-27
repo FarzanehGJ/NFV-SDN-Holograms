@@ -109,11 +109,10 @@ function resolveWait(url) {
 var oXHR = new XMLHttpRequest();
 
           oXHR.open("GET", url, true);
-
           oXHR.onreadystatechange = function (oEvent) {
               if (oXHR.readyState === 4) {
                   if (oXHR.status === 200) {
-                    console.log(oXHR.responseText)
+                     //console.log(oXHR.responseText) //typed 200 for each file
                   } else {
                      console.log("Error", oXHR.statusText);
                   }
@@ -121,10 +120,9 @@ var oXHR = new XMLHttpRequest();
           };
       oXHR.send(null);
   return new Promise((resolve) => {
-  setTimeout(function(){
-      resolve(1);
-  },400);
-
+      setTimeout(function(){
+          resolve(1);
+      },400);
   });
 }
 

@@ -13,12 +13,12 @@ function response(fileNum,res){
     console.log(command);
     subExec.exec(command);
     console.log("Done!");
-    res.writeHead(200);
+   // res.writeHead(200);
     res.end('200');
 }
 
 const server = http.createServer(function (req,res){
-
+    res.setHeader("Access-Control-Allow-Origin", "*"); //added to resolve "No 'Access-Control-Allow-Origin' " error
     let address = url.parse(req.url,true);
     var Url = address.href;
     var fileNum = Url.split("/");
