@@ -2,7 +2,7 @@
 
 **For Client side - WebXR Webpage**<br />
 1) Clone this project
-2) Clone three.js repository from [three.js github](https://github.com/mrdoob/three.js/) and put it in the same directory of "PLY-hologram.html" code.
+2) Clone three.js repository from [three.js github](https://github.com/mrdoob/three.js/) and put it in the same directory of "PLY-hologram.html" code and change the folder name to "three".
 3) Download dataset of [PLY files](http://plenodb.jpeg.org/pc/8ilabs/). Then copy just "Ply" folder and Paset it in the same directory of "PLY-hologram.html" code.
 4) Clone [draco repository](https://github.com/google/draco) and build it inside the NFV-SDN-Hologram project folder.
 5) Run WebServer.js in one terminal
