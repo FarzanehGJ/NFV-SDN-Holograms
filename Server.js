@@ -2,19 +2,31 @@
 
 const http = require('http');
 var url = require('url');
+const fs = require('fs')
 const host = 'localhost';
 const port = 8080;
 
 // This function will run the draco_decoder to decode each drc file to ply
-function response(fileNum,res){
+async function response(fileNum,res){
+
     const subExec = require("child_process");
-    let command = " ";
     command = "./draco/build_dir/draco_decoder  -i ./encoderOut/"+fileNum+".drc -o ./decoded/"+fileNum+".ply";
     console.log(command);
     subExec.exec(command);
-    console.log("Done!");
-   // res.writeHead(200);
+    //await wait(command,subExec);
+    const path = "./decoded/"+fileNum+".ply";
+    await wait(fs,path);
+    res.writeHead(200);
     res.end('200');
+}
+
+function wait(fs,path){
+    return new Promise((resolve) => {
+        while(!fs.existsSync(path)){
+            continue;
+        }
+        resolve(fs.existsSync(path));
+    });
 }
 
 const server = http.createServer(function (req,res){
@@ -28,6 +40,7 @@ const server = http.createServer(function (req,res){
     }
     else {
         res.writeHead(404);
+        res.end("error");
     }
 });
 

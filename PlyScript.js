@@ -106,15 +106,17 @@ async function loadLoop(loader,scene){
 // This function will send request to the server for decoding targeted file
 // the promise will use to make the process synchronous
 function resolveWait(url) {
-var oXHR = new XMLHttpRequest();
 
+    var oXHR = new XMLHttpRequest();
           oXHR.open("GET", url, true);
           oXHR.onreadystatechange = function (oEvent) {
               if (oXHR.readyState === 4) {
                   if (oXHR.status === 200) {
-                     //console.log(oXHR.responseText) //typed 200 for each file
+                     console.log(oXHR.responseText) //typed 200 for each file
+                     //resolve(oXHR.responseText);
                   } else {
                      console.log("Error", oXHR.statusText);
+                     //reject("Error", oXHR.statusText);
                   }
               }
           };
